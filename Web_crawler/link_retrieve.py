@@ -11,3 +11,10 @@ def link_retriever(url):
     else:
         print("Failed to retrieve next ling from the URL.")
         return None
+    
+def link_compiler(url, num_chapters):
+    links = []
+    for _ in range(num_chapters):
+        links.append(url)
+        url = link_retriever(url)
+    return links

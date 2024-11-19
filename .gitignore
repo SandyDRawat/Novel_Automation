@@ -1,2 +1,5 @@
 .venv
 .git
+eg.py
+__pycache__
+books
