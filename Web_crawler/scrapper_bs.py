@@ -17,9 +17,9 @@ def scrapper_bs(url):
         
         paragraphs = content_element.find_all('p')
         
-        chapter_content = ''
+        chapter_content = []
         for p in paragraphs:
-            chapter_content += str(p)  # Convert to string to preserve HTML tags
+            chapter_content.append(str(p))  # Convert to string to preserve HTML tags
         return chapter_content,chapter_title
     else:
         print("Failed to retrieve content from the URL.")

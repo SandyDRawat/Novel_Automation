@@ -3,3 +3,4 @@
 eg.py
 __pycache__
 books/
+.env
