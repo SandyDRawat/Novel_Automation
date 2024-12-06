@@ -19,7 +19,11 @@ def create_epub(chapter_contents, novel_name, chapter_titles):
     book.toc = []
     spine = ['nav']
 
-    for i, content in enumerate(chapter_contents):
+    for i, contents in enumerate(chapter_contents):
+        content = ''
+        for entries in contents:
+            content += f'<p style="margin-bottom: 1em;">{entries}</p>\n'
+
         # Construct chapter content with title
         chapter_content_with_title = f'<h1>{chapter_titles[i]}</h1>\n{content}'
         
