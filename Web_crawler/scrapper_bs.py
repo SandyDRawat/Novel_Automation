@@ -12,7 +12,7 @@ def scrapper_bs(url):
             chapter_title = soup.find('span', class_="chr-text").text
             
         except:
-            content_element = soup.find('div', class_="read-content")
+            content_element = soup.find('div', id = "content")
             chapter_title = soup.find('h1').text
         
         paragraphs = content_element.find_all('p')
