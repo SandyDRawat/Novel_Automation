@@ -9,7 +9,7 @@ def link_retriever(url):
         try:
             next_chapter_link = soup.find('a', id='next_chap')['href']
         except:
-            next_chapter_link = "https://www.ptwxw.com" + soup.find('a', id='next_url')['href']
+            next_chapter_link = "https://www.quanben.io" + soup.find('a', {'rel':'next'})['href']
         return next_chapter_link
     else:
         print("Failed to retrieve next ling from the URL.")
