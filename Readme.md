@@ -1,6 +1,6 @@
 # Novel Scraper and EPUB Compiler
 
-This project is a Python-based tool for scraping novel chapters from the web and compiling them into an EPUB file. If the content is in Chinese, the tool can translate it into English before compilation. The application leverages **BeautifulSoup** for web scraping, **Ebooklib** for EPUB creation, and an optional translation API (e.g., Google Translate) for content translation.
+This project is a Python-based tool for scraping novel chapters from the web and compiling them into an EPUB file. If the content is in Chinese, the tool can translate it into English before compilation. The application leverages BeautifulSoup for web scraping, Ebooklib for EPUB creation, and an optional translation tool using a Hugging Face LLM model (Rawsand/opus-mt-zh-en-finetuned-zh-to-en). This model is based on the Helsinki-NLP/opus-mt-zh-en base model and is fine-tuned on a custom dataset of translated novels for content translation.
 
 ---
 
@@ -16,7 +16,7 @@ This project is a Python-based tool for scraping novel chapters from the web and
 ## Supported Webisites
 -    Novel-bin.com
 -    quanben.io
-### Read the disclaimer below
+#### Note:   Read the disclaimer below
 ---
 ## Setup
 
@@ -29,11 +29,9 @@ cd novel-scraper
 ```bash
 pip install -r requirements.txt
 ```
-- Modify Base URL and Start URL: Update the `base_url` and `start_url` in the code to point to the target novel website.
 
 ---
-Usage
-
+## Usage
 
 ### Running the Scraper
 
@@ -64,14 +62,16 @@ streamlit run app.py
 # project Structure
 ```Plaintext
 📦novel-scraper
- ┣ 📂books            # Folder for storing generated EPUB files
- ┣ 📂scraper          # Web scraping module
- ┃ ┗ 📜web_scraper.py # Logic for fetching and parsing chapter content
- ┣ 📂compiler         # EPUB creation module
- ┃ ┗ 📜epub_creator.py # Logic for compiling chapters into EPUB
- ┣ 📜main.py          # Entry point for the application
- ┣ 📜README.md        # Documentation
- ┗ 📜requirements.txt # Python dependencies
+ ┣ 📂books              # Folder for storing generated EPUB files
+ ┣ 📂Web_crawler           # Web scraping module
+ ┃ ┗ 📜web_crawler.py   # Logic for fetching and parsing chapter content
+ ┣ 📂Translation           # Translation module
+ ┃ ┗ 📜translator.py    # Logic for translation
+ ┣ 📂book_compiler         # EPUB creation module
+ ┃ ┗ 📜epub_compiler.py # Logic for compiling chapters into EPUB
+ ┣ 📜app.py             # Script to run the streamlit app
+ ┣ 📜README.md          # Documentation
+ ┗ 📜requirements.txt   # Python dependencies
 ```
 ---
 
