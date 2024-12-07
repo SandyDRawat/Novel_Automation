@@ -1,10 +1,9 @@
-from Web_crawler.link_retrieve import link_compiler
-from Web_crawler.scrapper_bs import  compiled_scrapper
 from book_compiler.epub_compiler import create_epub
 from data_processing.translator import translate_chapters
+from Web_crawler.web_crawler import WebScraper
 url = input("URL of The Starting Chapter: ")
 num_chapters_to_scrape = int(input("Number of Chapters: "))
-translate_bool = bool(input("Translate to English? (1/0): "))
+translate_bool = bool(input("Translate to English? Just click enter if No else input 1: "))
 book_name = input("Give book name if you want else just press enter: ")
 
 if book_name:
@@ -18,11 +17,12 @@ else:
 
 # Initialize lists to store chapter content and chapter numbers
 
+scrapper = WebScraper("https://www.quanben.io")
 
-chapter_links = link_compiler(url, num_chapters_to_scrape)
 
-chapter_contents,chapter_titles = compiled_scrapper(chapter_links)
+chapter_contents,chapter_titles = scrapper.scrape_chapters(url, num_chapters_to_scrape)
 
+print(translate_bool)
 if translate_bool:
     chapter_contents = translate_chapters(chapter_contents)
 
