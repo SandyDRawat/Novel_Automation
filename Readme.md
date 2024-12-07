@@ -13,16 +13,10 @@ This project is a Python-based tool for scraping novel chapters from the web and
 
 ---
 
-## Requirements
-
-### Python Version
-- Python 3.7 or higher
-
-### Dependencies
-Install the required dependencies using pip:
-```bash
-pip install -r requirements.txt
-```
+## Supported Webisites
+-    Novel-bin.com
+-    quanben.io
+### Read the disclaimer below
 ---
 ## Setup
 
