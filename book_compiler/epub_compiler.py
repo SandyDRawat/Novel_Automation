@@ -61,3 +61,4 @@ def create_epub(chapter_contents, novel_name, chapter_titles):
     # Write the EPUB file
     epub.write_epub(epub_name, book)
     print(f"EPUB file created at: {epub_name}")
+    return epub_name
