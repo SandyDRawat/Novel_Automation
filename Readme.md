@@ -22,8 +22,7 @@ This project is a Python-based tool for scraping novel chapters from the web and
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/SandyDRawat/Novel_Automation.git
-cd Novel_Automation
+git clone https://github.com/SandyDRawat/Novel_Automation
 ```
 ### Install Dependencies
 ```bash
