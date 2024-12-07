@@ -13,7 +13,7 @@ This project is a Python-based tool for scraping novel chapters from the web and
 
 ---
 
-## Supported Webisites
+## Supported Websites
 -    Novel-bin.com
 -    quanben.io
 #### Note:   Read the disclaimer below
@@ -44,17 +44,17 @@ streamlit run app.py
 
     -   `base_url`: Base URL of the website.
 
-2.  Open the `web_crawler.py` file and update the tags to reterieve the contents as per you target website namely:
+2.  Open the `web_crawler.py` file and Update the tags to retrieve the content as per your target website, namely:
 
-    -  Then content element tag
-    -  chapter title tag
-    -  Next chapter link tag
-    -  Also check if the url in next chapter link element is relative( not starts with http://websitename.com) or not. and if not remove it from next chapter link method as also mentionded in the comments there.
+    -  The content element tag
+    -  The chapter title tag
+    -  The next chapter link tag
+    -  Also, check if the URL in the next chapter link element is relative (does not start with `http://websitename.com`). If it is, remove it from the next chapter link method, as mentioned in the comments there.
 
 3.  Then run `app.py` script which will:
 
     -   Start a local hosted streamlit app dashboard.
-    -   Fill the necessary input feilds.
+    -   Fill the necessary input fields.
     -   Use Translate checkbox if translating content to English (from Chinese) is needed.
     -   Wait as translation takes time and then download the epub file.
 
