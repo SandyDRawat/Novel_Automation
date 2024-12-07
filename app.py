@@ -25,6 +25,7 @@ if st.button("Start Scraping"):
         if book_name:
             novel_name = book_name
         else:
+            # Extract novel name from URL
             try:
                 novel_name = url.split('/book/')[1].split('/')[0]
             except:

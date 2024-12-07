@@ -1,10 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 
-class WebScraper:
-    def __init__(self, base_url):
+class WebScraper: 
+    def __init__(self, base_url):   
+        """
+        Initializes the WebScraper with a base URL.
+        Args: base_url (str): The base URL of the website to scrape.
+        """
         self.base_url = base_url
-
+    
     def fetch_page(self, url):
         """Fetches the content of a webpage."""
         req = requests.get(url)
@@ -17,16 +21,21 @@ class WebScraper:
 
     def get_next_chapter_link(self, soup):
         """Retrieves the next chapter link from a BeautifulSoup object."""
+        
         try:
+            # tag for next chapter link from english novel website
+            # if you want to use another website, you need to find the tag for next chapter link and edit it here
             return soup.find('a', id='next_chap')['href']
         except:
+            # tag for next chapter link from chinese novel website
             next_chapter = soup.find('a', {'rel': 'next'})
+            # here base_url is needed because the next_chapter['href'] is a relative link
             if next_chapter:
                 return self.base_url + next_chapter['href']
         return None
 
     def retrieve_links(self, start_url, num_chapters):
-        """Retrieves links to the specified number of chapters."""
+        """Retrieves links to the specified number of chapters. by using the next chapter link in loop"""
         links = []
         current_url = start_url
 
@@ -45,12 +54,14 @@ class WebScraper:
     def extract_content(self, soup):
         """Extracts chapter content and title from a BeautifulSoup object."""
         try:
+            # tag for chapter content element and title from english novel website
             content_element = soup.find('div', class_="chr-c")
             chapter_title = soup.find('span', class_="chr-text").text
         except:
+            # tag for chapter content element and title from chinese novel website
             content_element = soup.find('div', id="content")
             chapter_title = soup.find('h1').text
-
+        # extract paragraphs from content element
         paragraphs = content_element.find_all('p') if content_element else []
         chapter_content = [p.text for p in paragraphs]
         return chapter_content, chapter_title
@@ -74,8 +85,8 @@ class WebScraper:
 
 # Example usage
 if __name__ == "__main__":
-    base_url = "https://www.quanben.io"
-    start_url = "https://www.quanben.io/chapter/start_page.html"
+    base_url = "https://www.asdfg.hikks"
+    start_url = "https://www.asdfg.hikks/chapter145454"
     num_chapters = 5
 
     scraper = WebScraper(base_url)
