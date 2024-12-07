@@ -43,23 +43,53 @@ Usage
 
 ### Running the Scraper
 
-1.  Open the `main.py` file and update the following:
+- If default websites have the content you desire then just run `app.py` file and give the inputs and you can download the desired files:
+```bash
+streamlit run app.py
+```
+- Else
+1.  Open the `app.py` file and update the following:
 
     -   `base_url`: Base URL of the website.
-    -   `start_url`: URL of the first chapter.
-    -   `num_chapters`: Number of chapters to scrape.
-2.  Run the script:
 
-    bash
+2.  Open the `web_crawler.py` file and update the tags to reterieve the contents as per you target website namely:
 
-    Copy code
+    -  Then content element tag
+    -  chapter title tag
+    -  Next chapter link tag
+    -  Also check if the url in next chapter link element is relative( not starts with http://websitename.com) or not. and if not remove it from next chapter link method as also mentionded in the comments there.
 
-    `python main.py`
+3.  Then run `app.py` script which will:
 
-3.  The script will:
+    -   Start a local hosted streamlit app dashboard.
+    -   Fill the necessary input feilds.
+    -   Use Translate checkbox if translating content to English (from Chinese) is needed.
+    -   Wait as translation takes time and then download the epub file.
 
-    -   Fetch chapters from the specified `start_url`.
-    -   Extract content and titles for the desired number of chapters.
-    -   Translate content to English (if in Chinese).
-    -   Compile the chapters into an EPUB file saved in the `books` folder.
+---
+# project Structure
+```Plaintext
+📦novel-scraper
+ ┣ 📂books            # Folder for storing generated EPUB files
+ ┣ 📂scraper          # Web scraping module
+ ┃ ┗ 📜web_scraper.py # Logic for fetching and parsing chapter content
+ ┣ 📂compiler         # EPUB creation module
+ ┃ ┗ 📜epub_creator.py # Logic for compiling chapters into EPUB
+ ┣ 📜main.py          # Entry point for the application
+ ┣ 📜README.md        # Documentation
+ ┗ 📜requirements.txt # Python dependencies
+```
+---
+
+## Disclaimer
+
+This tool is intended for personal use only. Before using this tool to scrape content from any website, ensure that your actions comply with the website's terms of service and privacy policies.  
+
+### Websites Tested
+- [Quanben.io](https://www.quanben.io) (Chinese novels): As of now, the `robots.txt` file allows scraping with `User-agent: * Allow: /`.
+- [Novel-bin](https://novel-bin.com) (English novels): Allows scraping for personal use as per the website's terms.  
+
+**Note**: While the `robots.txt` file for Quanben.io permits scraping, and the English website's terms allow personal use, this does not constitute blanket permission. It is your responsibility to verify and adhere to the rules of the specific website you are scraping.  
+
+The project creator is not responsible for any misuse of this tool or legal issues arising from non-compliance with website policies.
 
