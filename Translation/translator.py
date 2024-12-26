@@ -1,29 +1,50 @@
-from dotenv import load_dotenv
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
-load_dotenv()
+from llama_cpp import Llama
 
-#HF_token = os.getenv('HF_TOKEN')
-# load finetuned model tranined on custom dataset for chinese to english translation of novels 
-model = AutoModelForSeq2SeqLM.from_pretrained("Rawsand/opus-mt-zh-en-finetuned-zh-to-en")
-tokenizer = AutoTokenizer.from_pretrained("Rawsand/opus-mt-zh-en-finetuned-zh-to-en")
+llm = Llama.from_pretrained(
+	repo_id="Rawsand/llama3.1_zhtoen_translation_v3_gguf",
+	filename="unsloth.Q8_0.gguf",
+)
 
-# function to translate text from chinese to english
-def translate(text):
-    translated = model.generate(**tokenizer(text, return_tensors="pt", padding=True))
-    return [tokenizer.decode(t, skip_special_tokens=True) for t in translated]
 
-# function to translate chapters from chinese to english
+translation_prompt = """Below is a Chinese text that needs to be translated into English.
+
+### Chinese Text:
+{}
+
+### English Translation:
+{}"""
+
+
+def formatting_prompts_func_without_english(chinese_texts):
+   
+    texts = []
+    for chinese_text in chinese_texts:
+        text = translation_prompt.format(chinese_text, "") #+ EOS_TOKEN
+        texts.append(text)
+    return texts
+    
+
+# Function to translate text from Chinese to English
+def translate(texts):
+    formatted_texts = formatting_prompts_func_without_english(texts)
+    predictions = []
+    for text in formatted_texts:
+        output = llm(text,max_tokens=512,echo=True)
+        output = output['choices'][0]['text']
+        prediction = output.split("Translation:\n")[1].strip()
+        print(prediction)
+        predictions.append(prediction)
+    return predictions
+
+# Function to translate chapters from Chinese to English
 def translate_chapters(chapters):
+    print(chapters[0])
     translated_chapters = []
     for chapter in chapters:
-        translated_content = []
-        for content in chapter:
-            translated_content.append(translate(content))
-        translated_chapters.append(translated_content)
+        translated_chapters.append(translate(chapter))
     return translated_chapters
 
-
-# test the translation function
+# Test the translation function
 if __name__ == "__main__":
-    text = "你好吗？"
+    text = ["你好吗？","尤其，这是孟浩在第七命下展开的七婴图腾，威力之强，轰天撼地。"]  # Wrap in a list to match the expected input format
     print(translate(text))
