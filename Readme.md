@@ -1,6 +1,6 @@
 # Novel Scraper and EPUB Compiler
 
-This project is a Python-based tool for scraping novel chapters from the web and compiling them into an EPUB file. If the content is in Chinese, the tool can translate it into English before compilation. The application leverages BeautifulSoup for web scraping, Ebooklib for EPUB creation, and an optional translation tool using a Hugging Face LLM model (Rawsand/opus-mt-zh-en-finetuned-zh-to-en). This model is based on the Helsinki-NLP/opus-mt-zh-en base model and is fine-tuned on a custom dataset of translated novels for content translation.
+This project is a Python-based tool for scraping novel chapters from the web and compiling them into an EPUB file. If the content is in Chinese, the tool can translate it into English before compilation. The application leverages BeautifulSoup for web scraping, Ebooklib for EPUB creation, and an optional translation tool using a Hugging Face LLM model (Rawsand/llama3.1_zhtoen_translation_v3_gguf). This model is based on the Helsinki-NLP/opus-mt-zh-en base model and is fine-tuned on a custom dataset of translated novels for content translation.
 
 ---
 
